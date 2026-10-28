@@ -1,12 +1,4 @@
-DROP TABLE IF EXISTS repair_logs;
-DROP TABLE IF EXISTS notifications;
-DROP TABLE IF EXISTS repair_orders;
-DROP TABLE IF EXISTS reservations;
-DROP TABLE IF EXISTS equipment;
-DROP TABLE IF EXISTS labs;
-DROP TABLE IF EXISTS users;
-
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) NOT NULL UNIQUE,
     password VARCHAR(100) NOT NULL,
@@ -16,14 +8,14 @@ CREATE TABLE users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE labs (
+CREATE TABLE IF NOT EXISTS labs (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     location VARCHAR(200),
     description VARCHAR(500)
 );
 
-CREATE TABLE equipment (
+CREATE TABLE IF NOT EXISTS equipment (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     lab_id BIGINT NOT NULL,
     code VARCHAR(50) NOT NULL UNIQUE,
@@ -34,7 +26,7 @@ CREATE TABLE equipment (
     purchase_date DATE
 );
 
-CREATE TABLE reservations (
+CREATE TABLE IF NOT EXISTS reservations (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     user_id BIGINT NOT NULL,
     equipment_id BIGINT NOT NULL,
@@ -46,7 +38,7 @@ CREATE TABLE reservations (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE repair_orders (
+CREATE TABLE IF NOT EXISTS repair_orders (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     user_id BIGINT NOT NULL,
     equipment_id BIGINT NOT NULL,
@@ -59,7 +51,7 @@ CREATE TABLE repair_orders (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE notifications (
+CREATE TABLE IF NOT EXISTS notifications (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     user_id BIGINT NOT NULL,
     title VARCHAR(100),
@@ -69,7 +61,7 @@ CREATE TABLE notifications (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE repair_logs (
+CREATE TABLE IF NOT EXISTS repair_logs (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     repair_id BIGINT NOT NULL,
     from_status VARCHAR(20),

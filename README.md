@@ -49,17 +49,30 @@ npm run dev
 
 ## 切换 MySQL
 
-1. 安装并启动 MySQL 8。
-2. 执行 `database/schema.sql` 创建表结构。
-3. 执行 `database/init-data.sql` 或按 README 使用后端 `DataInitializer` 自动写入。
-4. 启动后端时指定 MySQL 配置：
+1. 确保 MySQL 8 已启动，并已创建数据库：
+
+```sql
+CREATE DATABASE lab_reservation CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE USER 'lab'@'localhost' IDENTIFIED BY '你的密码';
+GRANT ALL PRIVILEGES ON lab_reservation.* TO 'lab'@'localhost';
+FLUSH PRIVILEGES;
+```
+
+2. 设置数据库连接环境变量：
+
+```powershell
+$env:DB_USERNAME = "lab"
+$env:DB_PASSWORD = "你的密码"
+```
+
+3. 启动后端并启用 mysql profile：
 
 ```bash
 cd backend
 mvn spring-boot:run -Dspring-boot.run.profiles=mysql
 ```
 
-并将 `backend/src/main/resources/application-mysql.yml` 中的数据库密码改成真实值。
+后端会自动执行 `schema-mysql.sql` 建表，并在首次启动时写入演示数据。
 
 ## 构建
 

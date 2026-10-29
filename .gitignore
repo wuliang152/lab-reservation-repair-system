@@ -1,0 +1,28 @@
+# Node
+node_modules/
+dist/
+.vite/
+.env
+.env.*
+!.env.example
+
+# Java
+target/
+*.class
+*.jar
+!.mvn/wrapper/maven-wrapper.jar
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# Database and uploads
+*.db
+*.sqlite3
+database/*.log
+uploads/
+
+# OS
+.DS_Store
+Thumbs.db
